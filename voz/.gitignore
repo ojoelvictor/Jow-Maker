@@ -6,3 +6,5 @@ saidas/
 *.wav
 *.mp3
 *.m4a
+# Cache do Python
+__pycache__/
