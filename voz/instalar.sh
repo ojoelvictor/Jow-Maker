@@ -15,7 +15,7 @@ uv venv --python 3.11 .venv
 echo "Instalando o Chatterbox (pode levar alguns minutos)..."
 uv pip install --python .venv/bin/python chatterbox-tts==0.1.7
 
-chmod +x falar
+chmod +x falar servidor
 echo
 echo "Pronto! Agora grave sua voz em voz/minha_voz.wav e rode:"
 echo "  ./voz/falar \"Olá, essa é a minha voz.\""

@@ -59,6 +59,54 @@ def escolher_dispositivo() -> str:
     return "cpu"  # Mac com Intel: funciona, só que mais devagar
 
 
+def carregar_modelo(voz: str, emocao: float = 0.5):
+    """Carrega o Chatterbox e prepara a sua voz. Demora; faça uma vez só."""
+    os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
+    from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+
+    dispositivo = escolher_dispositivo()
+    print(f"Carregando o modelo ({dispositivo})...")
+    modelo = ChatterboxMultilingualTTS.from_pretrained(device=dispositivo)
+    modelo.prepare_conditionals(str(voz), exaggeration=emocao)
+    return modelo
+
+
+def gerar(modelo, texto: str, idioma: str = "pt", emocao: float = 0.5,
+          ritmo: float = 0.5, mostrar: bool = True):
+    """Fala o texto (de qualquer tamanho) e devolve um tensor [1, amostras]."""
+    import torch
+
+    trechos = dividir_texto(texto)
+    if not trechos:
+        raise ValueError("texto vazio")
+    pausa = torch.zeros(1, int(modelo.sr * 0.25))
+    partes = []
+    for i, trecho in enumerate(trechos, 1):
+        if mostrar:
+            print(f"[{i}/{len(trechos)}] {trecho}")
+        wav = modelo.generate(trecho, language_id=idioma,
+                              exaggeration=emocao, cfg_weight=ritmo)
+        partes += [wav.cpu(), pausa]
+    return torch.cat(partes[:-1], dim=1)
+
+
+def para_wav(audio, taxa: int) -> bytes:
+    """Converte o tensor em bytes de um arquivo WAV 16-bit mono."""
+    import io
+    import wave
+
+    import numpy as np
+
+    amostras = (audio.squeeze(0).clamp(-1, 1).numpy() * 32767).astype(np.int16)
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(taxa)
+        w.writeframes(amostras.tobytes())
+    return buf.getvalue()
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="Fala qualquer texto com a sua voz clonada.")
     p.add_argument("texto", nargs="?", help="o texto a falar (ou use -a)")
@@ -85,32 +133,15 @@ def main() -> None:
         sys.exit(f"Não achei a gravação da sua voz em {voz}.\n"
                  "Grave 10 a 30 segundos falando naturalmente e salve com esse nome.")
 
-    os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
-    import torch
-    import torchaudio
-    from chatterbox.mtl_tts import ChatterboxMultilingualTTS
-
-    dispositivo = escolher_dispositivo()
-    print(f"Carregando o modelo ({dispositivo})...")
-    modelo = ChatterboxMultilingualTTS.from_pretrained(device=dispositivo)
-    modelo.prepare_conditionals(str(voz), exaggeration=args.emocao)
-
-    trechos = dividir_texto(texto)
-    pausa = torch.zeros(1, int(modelo.sr * 0.25))
-    partes = []
-    for i, trecho in enumerate(trechos, 1):
-        print(f"[{i}/{len(trechos)}] {trecho}")
-        wav = modelo.generate(trecho, language_id=args.idioma,
-                              exaggeration=args.emocao, cfg_weight=args.ritmo)
-        partes += [wav.cpu(), pausa]
-    audio = torch.cat(partes[:-1], dim=1)
+    modelo = carregar_modelo(voz, args.emocao)
+    audio = gerar(modelo, texto, args.idioma, args.emocao, args.ritmo)
 
     if args.saida:
         saida = Path(args.saida)
     else:
         saida = PASTA / "saidas" / datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S.wav")
     saida.parent.mkdir(parents=True, exist_ok=True)
-    torchaudio.save(str(saida), audio, modelo.sr)
+    saida.write_bytes(para_wav(audio, modelo.sr))
     print(f"\nPronto: {saida}")
 
 

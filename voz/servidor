@@ -1,0 +1,5 @@
+#!/bin/bash
+# Atalho: ./voz/servidor  -> deixa a sua voz disponível em http://localhost:5005
+DIR="$(cd "$(dirname "$0")" && pwd)"
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+exec "$DIR/.venv/bin/python" "$DIR/servidor.py" "$@"

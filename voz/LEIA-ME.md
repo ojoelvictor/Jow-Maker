@@ -38,6 +38,30 @@ O `.gitignore` impede que ele vá para o GitHub. Faça um backup dele por conta 
 
 Textos longos são divididos em frases automaticamente e juntados num áudio só.
 
+## 4. Usar a voz em outro app (ex.: Jarvis)
+
+Deixe o servidor rodando num Terminal:
+
+```bash
+./voz/servidor
+```
+
+Quando aparecer `Voz pronta em http://localhost:5005`, qualquer app no Mac pode pedir áudio:
+
+```bash
+curl -X POST http://localhost:5005/falar \
+  -H "Content-Type: application/json" \
+  -d '{"texto": "Bom dia, senhor. Você tem três tarefas hoje."}' \
+  -o resposta.wav
+```
+
+O servidor também imita a API do ElevenLabs. Um app que chama
+`https://api.elevenlabs.io/v1/text-to-speech/<voz>` só precisa trocar o começo do endereço
+para `http://localhost:5005`, e o resto da chamada continua igual (a chave e o id da voz são ignorados).
+A resposta vem em WAV (`audio/wav`), não em MP3.
+
+O servidor só aceita conexões do próprio Mac e gera um áudio por vez. Respostas curtas levam alguns segundos.
+
 ## Dicas
 
 - **Mac com chip Apple (M1, M2, M3...)**: usa a placa de vídeo do chip e fica rápido.
