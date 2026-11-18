@@ -1,0 +1,8 @@
+# Ambiente Python criado pelo instalar.sh
+.venv/
+# Áudios gerados
+saidas/
+# Sua gravação de referência e outros áudios: ficam só no seu Mac
+*.wav
+*.mp3
+*.m4a
