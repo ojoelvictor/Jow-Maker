@@ -1,0 +1,88 @@
+{
+  "cliente": "Ana & Pedro",
+  "evento": "Casamento",
+  "data": "2026-10-12",
+  "local": "Volta Redonda, RJ",
+  "mensagem": "Foi uma honra registrar esse dia. Aqui estão todas as fotos e vídeos editados — baixe e compartilhe à vontade!",
+  "capa": "https://picsum.photos/id/1015/2400/1400",
+  "baixarTudo": "",
+  "expira": "2027-12-31",
+  "arquivos": [
+    {
+      "tipo": "video",
+      "nome": "Teaser do evento",
+      "link": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "capa": "https://picsum.photos/id/1080/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 01",
+      "link": "https://picsum.photos/id/1015/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 02",
+      "link": "https://picsum.photos/id/1016/1067/1600"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 03",
+      "link": "https://picsum.photos/id/1018/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 04",
+      "link": "https://picsum.photos/id/1019/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 05",
+      "link": "https://picsum.photos/id/1025/1067/1600"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 06",
+      "link": "https://picsum.photos/id/1036/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 07",
+      "link": "https://picsum.photos/id/1039/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 08",
+      "link": "https://picsum.photos/id/1043/1067/1600"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 09",
+      "link": "https://picsum.photos/id/1044/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 10",
+      "link": "https://picsum.photos/id/1047/1600/1200"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 11",
+      "link": "https://picsum.photos/id/1050/1067/1600"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 12",
+      "link": "https://picsum.photos/id/1062/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 13",
+      "link": "https://picsum.photos/id/1069/1600/1067"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 14",
+      "link": "https://picsum.photos/id/1074/1200/1600"
+    }
+  ]
+}

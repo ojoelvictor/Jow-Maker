@@ -1,0 +1,27 @@
+{
+  "cliente": "Nome do Cliente",
+  "evento": "Ensaio / Casamento / Aniversário…",
+  "data": "2026-11-21",
+  "local": "Cidade, UF",
+  "mensagem": "Mensagem de carinho para o cliente (opcional).",
+  "capa": "https://drive.google.com/file/d/ID_DA_FOTO_DE_CAPA/view?usp=sharing",
+  "baixarTudo": "https://drive.google.com/drive/folders/ID_DA_PASTA?usp=sharing",
+  "expira": "2027-02-21",
+  "arquivos": [
+    {
+      "tipo": "foto",
+      "nome": "Foto 01",
+      "link": "https://drive.google.com/file/d/ID_DA_FOTO/view?usp=sharing"
+    },
+    {
+      "tipo": "foto",
+      "nome": "Foto 02",
+      "link": "https://drive.google.com/file/d/ID_DA_FOTO/view?usp=sharing"
+    },
+    {
+      "tipo": "video",
+      "nome": "Filme do evento",
+      "link": "https://drive.google.com/file/d/ID_DO_VIDEO/view?usp=sharing"
+    }
+  ]
+}

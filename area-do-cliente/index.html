@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Área do Cliente — JOW MAKER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --or: #F25623;
+  --or-dk: #c0390e;
+  --bk: #171717;
+  --bk2: #1f1f1f;
+  --lg: #DEDEDE;
+  --dg: #4D4D4D;
+  --mut: rgba(222,222,222,0.5);
+  --line: rgba(255,255,255,0.08);
+  --wh: #ffffff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bk);
+  color: var(--lg);
+  font-family: 'Sora', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bk); }
+::-webkit-scrollbar-thumb { background: var(--or); }
+button { font-family: inherit; cursor: pointer; }
+a { color: inherit; }
+.hidden { display: none !important; }
+
+/* ---------- NAV ---------- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: 72px; padding: 0 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(23,23,23,0.85);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--line);
+}
+.logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; letter-spacing: 1px; color: var(--wh); text-decoration: none; }
+.logo span { color: var(--or); }
+.nav-tag { font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--mut); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.btn-ghost {
+  background: transparent; border: 1px solid var(--line); color: var(--lg);
+  padding: 10px 20px; border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: .04em;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--or); color: var(--wh); }
+
+/* ---------- LOGIN ---------- */
+.login {
+  min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; padding-top: 72px;
+}
+.login-art {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--or) 0%, var(--or-dk) 55%, var(--bk) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 56px 52px;
+}
+.login-art::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.login-art .frame {
+  position: absolute; top: 48px; right: 48px; width: 120px; height: 120px;
+  border: 1px solid rgba(255,255,255,.25); border-radius: 50%;
+  display: grid; place-items: center;
+}
+.login-art .frame::after { content: ''; width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,.9); animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.login-art h1 {
+  position: relative; font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(48px, 5.5vw, 88px); line-height: .95; letter-spacing: -2px; color: var(--wh);
+}
+.login-art h1 em { display: block; font-style: italic; }
+.login-art p { position: relative; margin-top: 22px; max-width: 420px; color: rgba(255,255,255,.78); font-size: 15px; line-height: 1.7; font-weight: 300; }
+
+.login-form-wrap { display: flex; align-items: center; justify-content: center; padding: 56px 52px; }
+.login-form { width: 100%; max-width: 380px; }
+.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--or); margin-bottom: 14px; }
+.login-form h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--wh); line-height: 1.1; margin-bottom: 12px; }
+.login-form .sub { color: var(--mut); font-size: 14px; line-height: 1.6; margin-bottom: 36px; }
+.field label { display: block; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--mut); margin-bottom: 10px; }
+.field input {
+  width: 100%; background: var(--bk2); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; color: var(--wh); font-family: inherit; font-size: 16px; letter-spacing: .06em;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus { border-color: var(--or); box-shadow: 0 0 0 4px rgba(242,86,35,.15); }
+.field input::placeholder { color: var(--dg); }
+.error { color: #ff8a65; font-size: 13px; margin-top: 12px; min-height: 18px; }
+.btn-primary {
+  width: 100%; margin-top: 18px; background: var(--or); color: var(--wh); border: none;
+  padding: 18px 26px; border-radius: 100px; font-size: 13px; font-weight: 600; letter-spacing: .06em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: transform .2s, box-shadow .2s, opacity .2s; text-decoration: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(242,86,35,.4); }
+.btn-primary:disabled { opacity: .6; transform: none; box-shadow: none; cursor: wait; }
+.help { margin-top: 28px; font-size: 13px; color: var(--mut); line-height: 1.6; }
+.help a { color: var(--or); text-decoration: none; font-weight: 500; }
+
+/* ---------- GALLERY HERO ---------- */
+.hero {
+  position: relative; min-height: 82vh; padding: 140px 52px 64px;
+  display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden;
+}
+.hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.06); animation: slowzoom 18s ease-out forwards; }
+@keyframes slowzoom { to { transform: scale(1); } }
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(23,23,23,.35) 0%, rgba(23,23,23,.2) 40%, rgba(23,23,23,.92) 85%, var(--bk) 100%);
+}
+.hero > *:not(.hero-bg) { position: relative; z-index: 1; }
+.hero .eyebrow { color: var(--wh); display: inline-flex; align-items: center; gap: 10px; }
+.hero .eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--or); }
+.hero h1 {
+  font-family: 'Playfair Display', serif; font-weight: 900; color: var(--wh);
+  font-size: clamp(44px, 7vw, 104px); line-height: .95; letter-spacing: -2px; max-width: 14ch;
+}
+.hero h1 em { font-style: italic; color: var(--or); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 26px; font-size: 13px; color: rgba(255,255,255,.75); }
+.hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta svg { width: 15px; height: 15px; stroke: var(--or); }
+.hero-msg { margin-top: 22px; max-width: 560px; color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.75; font-weight: 300; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.hero-actions .btn-primary { width: auto; margin-top: 0; }
+.hero-actions .btn-ghost { padding: 17px 26px; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: rgba(0,0,0,.25); backdrop-filter: blur(10px); }
+.btn-primary svg, .btn-ghost svg { width: 17px; height: 17px; }
+
+/* ---------- TOOLBAR ---------- */
+.toolbar {
+  position: sticky; top: 72px; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 52px; background: rgba(23,23,23,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.tabs { display: flex; gap: 6px; background: var(--bk2); padding: 5px; border-radius: 100px; border: 1px solid var(--line); }
+.tab {
+  background: transparent; border: none; color: var(--mut); padding: 10px 20px; border-radius: 100px;
+  font-size: 12px; font-weight: 500; letter-spacing: .04em; transition: background .2s, color .2s;
+}
+.tab .n { opacity: .55; margin-left: 4px; font-weight: 400; }
+.tab.active { background: var(--or); color: var(--wh); }
+.tab.active .n { opacity: .8; }
+.tab:not(.active):hover { color: var(--wh); }
+.expira { font-size: 12px; color: var(--mut); display: flex; align-items: center; gap: 8px; }
+.expira b { color: var(--lg); font-weight: 500; }
+.expira .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--or); }
+
+/* ---------- GRID ---------- */
+.grid { columns: 4 280px; column-gap: 14px; padding: 28px 52px 80px; }
+.item {
+  position: relative; break-inside: avoid; margin-bottom: 14px; border-radius: 14px; overflow: hidden;
+  background: var(--bk2); cursor: zoom-in; opacity: 0; transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.item.in { opacity: 1; transform: none; }
+.item img { display: block; width: 100%; height: auto; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .4s; }
+.item:hover img { transform: scale(1.04); filter: brightness(.82); }
+.item .ph { aspect-ratio: 4/3; display: grid; place-items: center; color: var(--dg); font-size: 12px; }
+.item-ov {
+  position: absolute; inset: auto 0 0 0; padding: 14px; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px;
+  background: linear-gradient(0deg, rgba(0,0,0,.7), transparent); opacity: 0; transition: opacity .3s;
+}
+.item:hover .item-ov, .item:focus-within .item-ov { opacity: 1; }
+.item-name { font-size: 12px; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dl-btn {
+  flex: none; width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--or); color: var(--wh);
+  display: grid; place-items: center; transition: transform .2s; text-decoration: none;
+}
+.dl-btn:hover { transform: scale(1.08); }
+.dl-btn svg { width: 17px; height: 17px; }
+.play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 64px; height: 64px; border-radius: 50%; background: rgba(242,86,35,.92);
+  display: grid; place-items: center; box-shadow: 0 10px 40px rgba(0,0,0,.4); pointer-events: none; transition: transform .3s;
+}
+.item:hover .play { transform: translate(-50%,-50%) scale(1.1); }
+.play svg { width: 22px; height: 22px; fill: var(--wh); margin-left: 3px; }
+.badge-video {
+  position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+  color: var(--wh); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  padding: 6px 10px; border-radius: 100px;
+}
+.empty { padding: 80px 52px; text-align: center; color: var(--mut); }
+
+/* ---------- LIGHTBOX ---------- */
+.lb {
+  position: fixed; inset: 0; z-index: 100; background: rgba(10,10,10,.985);
+  display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.lb.open { opacity: 1; pointer-events: auto; }
+.lb-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 28px; }
+.lb-count { font-size: 12px; letter-spacing: .1em; color: var(--mut); }
+.lb-title { font-size: 13px; color: var(--lg); flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-actions { display: flex; gap: 10px; }
+.icon-btn {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,.04);
+  color: var(--wh); display: grid; place-items: center; transition: background .2s, border-color .2s; text-decoration: none;
+}
+.icon-btn:hover { background: var(--or); border-color: var(--or); }
+.icon-btn svg { width: 18px; height: 18px; }
+.lb-stage { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; padding: 0 90px 28px; min-height: 0; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+.lb-stage iframe { width: min(100%, 1280px); aspect-ratio: 16/9; max-height: 100%; border: 0; border-radius: 6px; background: #000; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); }
+.lb-prev { left: 24px; } .lb-next { right: 24px; }
+.lb-nav.icon-btn { width: 52px; height: 52px; }
+.spinner { position: absolute; width: 34px; height: 34px; border: 2px solid var(--line); border-top-color: var(--or); border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- FOOTER / TOAST ---------- */
+footer { border-top: 1px solid var(--line); padding: 36px 52px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--mut); }
+footer a { color: var(--or); text-decoration: none; }
+.toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 200;
+  background: var(--wh); color: var(--bk); font-size: 13px; font-weight: 500; padding: 14px 22px; border-radius: 100px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.4); opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; height: 64px; }
+  .nav-tag { display: none; }
+  .login { grid-template-columns: 1fr; padding-top: 64px; }
+  .login-art { min-height: 42vh; padding: 40px 20px; }
+  .login-art .frame { width: 80px; height: 80px; top: 28px; right: 20px; }
+  .login-form-wrap { padding: 40px 20px 56px; }
+  .hero { padding: 120px 20px 44px; min-height: 74vh; }
+  .toolbar { top: 64px; padding: 12px 16px; flex-direction: column; align-items: stretch; gap: 10px; }
+  .tabs { justify-content: space-between; }
+  .tab { flex: 1; padding: 10px 8px; }
+  .expira { justify-content: center; }
+  .grid { columns: 2 150px; column-gap: 8px; padding: 16px 16px 60px; }
+  .item { margin-bottom: 8px; border-radius: 10px; }
+  .item-ov { opacity: 1; padding: 8px; background: none; justify-content: flex-end; }
+  .item-name { display: none; }
+  .dl-btn { width: 34px; height: 34px; }
+  .play { width: 48px; height: 48px; }
+  .lb-top { padding: 12px 14px; }
+  .lb-title { display: none; }
+  .lb-stage { padding: 0 0 16px; }
+  .lb-nav { top: auto; bottom: 24px; transform: none; }
+  .lb-prev { left: 16px; } .lb-next { right: 16px; }
+  footer { padding: 28px 20px; justify-content: center; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .item { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="../">JOW <span>MAKER</span></a>
+  <div class="nav-right">
+    <span class="nav-tag">Área do Cliente</span>
+    <button class="btn-ghost hidden" id="btnSair" type="button">Sair</button>
+  </div>
+</nav>
+
+<!-- ===== TELA DE ACESSO ===== -->
+<main id="telaLogin" class="login">
+  <section class="login-art" aria-hidden="true">
+    <div class="frame"></div>
+    <h1>Suas memórias,<em>prontas.</em></h1>
+    <p>Fotos e vídeos entregues com carinho pela Jow Maker. Visualize, reviva e baixe tudo em alta qualidade.</p>
+  </section>
+  <section class="login-form-wrap">
+    <form class="login-form" id="formLogin" autocomplete="off">
+      <div class="eyebrow">Entrega exclusiva</div>
+      <h2>Acesse sua galeria</h2>
+      <p class="sub">Digite o código de acesso que você recebeu pelo WhatsApp ou e-mail.</p>
+      <div class="field">
+        <label for="codigo">Código de acesso</label>
+        <input id="codigo" name="codigo" type="text" placeholder="ex.: ana-pedro-7x9k" autocapitalize="none" spellcheck="false" required>
+      </div>
+      <div class="error" id="erro" role="alert"></div>
+      <button class="btn-primary" id="btnEntrar" type="submit">
+        Entrar na galeria
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="help">Não encontrou seu código? <a id="linkAjuda" href="https://wa.me/5524993095410" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a></p>
+    </form>
+  </section>
+</main>
+
+<!-- ===== GALERIA ===== -->
+<main id="telaGaleria" class="hidden">
+  <header class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="eyebrow" id="gTipo">Galeria</div>
+    <h1 id="gTitulo"></h1>
+    <div class="hero-meta" id="gMeta"></div>
+    <p class="hero-msg hidden" id="gMsg"></p>
+    <div class="hero-actions" id="gAcoes"></div>
+  </header>
+
+  <div class="toolbar">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-f="todos" role="tab">Tudo<span class="n" id="nTodos"></span></button>
+      <button class="tab" data-f="foto" role="tab">Fotos<span class="n" id="nFotos"></span></button>
+      <button class="tab" data-f="video" role="tab">Vídeos<span class="n" id="nVideos"></span></button>
+    </div>
+    <div class="expira hidden" id="gExpira"></div>
+  </div>
+
+  <section class="grid" id="grid"></section>
+  <div class="empty hidden" id="vazio">Nenhum arquivo nesta categoria.</div>
+</main>
+
+<footer>
+  <span>© <span id="ano"></span> JOW MAKER — Produtora Audiovisual</span>
+  <span>Dúvidas? <a href="https://wa.me/5524993095410" target="_blank" rel="noopener">WhatsApp</a></span>
+</footer>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visualizar arquivo">
+  <div class="lb-top">
+    <span class="lb-count" id="lbCount"></span>
+    <span class="lb-title" id="lbTitle"></span>
+    <div class="lb-actions">
+      <a class="icon-btn" id="lbDl" title="Baixar" aria-label="Baixar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button class="icon-btn" id="lbClose" title="Fechar (Esc)" aria-label="Fechar" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="lb-stage" id="lbStage"></div>
+  <button class="icon-btn lb-nav lb-prev" id="lbPrev" aria-label="Anterior" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button class="icon-btn lb-nav lb-next" id="lbNext" aria-label="Próximo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (id) => document.getElementById(id);
+  const ICON_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+  const ICON_PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  const ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+  const ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-11a7 7 0 1114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  const ICON_IMG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>';
+  const STORAGE_KEY = 'jowmaker_codigo';
+
+  let galeria = null;
+  let arquivos = [];
+  let visiveis = [];
+  let atual = 0;
+
+  $('ano').textContent = new Date().getFullYear();
+
+  // ---------- Links do Google Drive ----------
+  function driveId(url) {
+    if (!url) return null;
+    const m = String(url).match(/\/d\/([a-zA-Z0-9_-]{10,})/) || String(url).match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+    return m ? m[1] : null;
+  }
+  function normalizar(a, i) {
+    const tipo = (a.tipo || 'foto').toLowerCase().startsWith('v') ? 'video' : 'foto';
+    const id = driveId(a.link);
+    const nome = a.nome || (tipo === 'video' ? 'Vídeo ' : 'Foto ') + String(i + 1).padStart(2, '0');
+    if (id) {
+      return {
+        tipo, nome, drive: true,
+        thumb: a.capa ? linkImagem(a.capa, 800) : 'https://drive.google.com/thumbnail?id=' + id + '&sz=w800',
+        full: tipo === 'foto' ? 'https://drive.google.com/thumbnail?id=' + id + '&sz=w2400' : 'https://drive.google.com/file/d/' + id + '/preview',
+        download: 'https://drive.google.com/uc?export=download&id=' + id
+      };
+    }
+    return {
+      tipo, nome, drive: false,
+      thumb: a.capa ? linkImagem(a.capa, 800) : (tipo === 'foto' ? a.link : null),
+      full: a.link,
+      download: a.download || a.link
+    };
+  }
+  function linkImagem(url, w) {
+    const id = driveId(url);
+    return id ? 'https://drive.google.com/thumbnail?id=' + id + '&sz=w' + w : url;
+  }
+
+  // ---------- Acesso ----------
+  function limparCodigo(c) { return String(c || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, ''); }
+
+  async function entrar(codigoBruto, silencioso) {
+    const codigo = limparCodigo(codigoBruto);
+    if (!codigo) { if (!silencioso) $('erro').textContent = 'Digite seu código de acesso.'; return; }
+    $('btnEntrar').disabled = true;
+    $('erro').textContent = '';
+    try {
+      const r = await fetch('galerias/' + codigo + '.json', { cache: 'no-store' });
+      if (!r.ok) throw new Error('nao-encontrado');
+      const dados = await r.json();
+      if (dados.expira && new Date(dados.expira + 'T23:59:59') < new Date()) {
+        throw new Error('expirada');
+      }
+      try { localStorage.setItem(STORAGE_KEY, codigo); } catch (e) {}
+      const url = new URL(location.href); url.searchParams.set('c', codigo);
+      history.replaceState(null, '', url);
+      mostrarGaleria(dados);
+    } catch (e) {
+      if (silencioso) { $('codigo').value = codigo; }
+      $('erro').textContent = e.message === 'expirada'
+        ? 'Esta galeria expirou. Fale com a gente para liberar novamente.'
+        : 'Código não encontrado. Confira e tente de novo.';
+      try { localStorage.removeItem(STORAGE_KEY); } catch (er) {}
+    } finally {
+      $('btnEntrar').disabled = false;
+    }
+  }
+
+  function sair() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    const url = new URL(location.href); url.searchParams.delete('c');
+    history.replaceState(null, '', url);
+    $('telaGaleria').classList.add('hidden');
+    $('btnSair').classList.add('hidden');
+    $('telaLogin').classList.remove('hidden');
+    $('codigo').value = '';
+    document.title = 'Área do Cliente — JOW MAKER';
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- Galeria ----------
+  function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  function formatarData(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T12:00:00');
+    if (isNaN(d)) return iso;
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  function mostrarGaleria(g) {
+    galeria = g;
+    arquivos = (g.arquivos || []).filter(a => a && a.link).map(normalizar);
+
+    const capa = g.capa ? linkImagem(g.capa, 2400) : (arquivos.find(a => a.tipo === 'foto') || {}).thumb;
+    $('heroBg').style.backgroundImage = capa ? 'url("' + capa.replace(/"/g, '%22') + '")' : 'linear-gradient(160deg,#F25623,#171717)';
+    $('gTipo').textContent = g.evento || 'Galeria';
+
+    // Título: última palavra em itálico laranja
+    const titulo = String(g.cliente || 'Sua galeria').trim();
+    const partes = titulo.split(' ');
+    const ultima = partes.length > 1 ? partes.pop() : null;
+    $('gTitulo').innerHTML = ultima ? esc(partes.join(' ')) + ' <em>' + esc(ultima) + '</em>' : '<em>' + esc(titulo) + '</em>';
+
+    const meta = [];
+    if (g.data) meta.push('<span>' + ICON_CAL + esc(formatarData(g.data)) + '</span>');
+    if (g.local) meta.push('<span>' + ICON_PIN + esc(g.local) + '</span>');
+    const nF = arquivos.filter(a => a.tipo === 'foto').length;
+    const nV = arquivos.length - nF;
+    meta.push('<span>' + ICON_IMG + nF + ' foto' + (nF === 1 ? '' : 's') + (nV ? ' · ' + nV + ' vídeo' + (nV === 1 ? '' : 's') : '') + '</span>');
+    $('gMeta').innerHTML = meta.join('');
+
+    if (g.mensagem) { $('gMsg').textContent = g.mensagem; $('gMsg').classList.remove('hidden'); }
+    else $('gMsg').classList.add('hidden');
+
+    const acoes = [];
+    if (g.baixarTudo) acoes.push('<a class="btn-primary" href="' + esc(g.baixarTudo) + '" target="_blank" rel="noopener">' + ICON_DL + ' Baixar tudo</a>');
+    acoes.push('<a class="btn-ghost" href="#grid">Ver galeria</a>');
+    $('gAcoes').innerHTML = acoes.join('');
+
+    $('nTodos').textContent = arquivos.length;
+    $('nFotos').textContent = nF;
+    $('nVideos').textContent = nV;
+    document.querySelector('.tab[data-f="video"]').classList.toggle('hidden', nV === 0);
+    document.querySelector('.tab[data-f="foto"]').classList.toggle('hidden', nF === 0);
+
+    if (g.expira) {
+      $('gExpira').innerHTML = '<span class="dot"></span>Disponível até <b>' + esc(formatarData(g.expira)) + '</b>';
+      $('gExpira').classList.remove('hidden');
+    } else $('gExpira').classList.add('hidden');
+
+    document.title = titulo + ' — JOW MAKER';
+    $('telaLogin').classList.add('hidden');
+    $('telaGaleria').classList.remove('hidden');
+    $('btnSair').classList.remove('hidden');
+    filtrar('todos');
+    window.scrollTo(0, 0);
+  }
+
+  const observer = 'IntersectionObserver' in window
+    ? new IntersectionObserver((ents) => ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } }), { rootMargin: '60px' })
+    : null;
+
+  function filtrar(f) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.f === f));
+    visiveis = arquivos.filter(a => f === 'todos' || a.tipo === f);
+    const grid = $('grid');
+    grid.innerHTML = '';
+    visiveis.forEach((a, i) => {
+      const el = document.createElement('article');
+      el.className = 'item';
+      el.tabIndex = 0;
+      el.setAttribute('aria-label', a.nome);
+      const media = a.thumb
+        ? '<img loading="lazy" alt="' + esc(a.nome) + '" src="' + esc(a.thumb) + '" referrerpolicy="no-referrer">'
+        : '<div class="ph">Vídeo</div>';
+      el.innerHTML = media +
+        (a.tipo === 'video' ? '<span class="badge-video">Vídeo</span><span class="play">' + ICON_PLAY + '</span>' : '') +
+        '<div class="item-ov"><span class="item-name">' + esc(a.nome) + '</span>' +
+        '<a class="dl-btn" href="' + esc(a.download) + '" target="_blank" rel="noopener" title="Baixar" aria-label="Baixar ' + esc(a.nome) + '">' + ICON_DL + '</a></div>';
+      const img = el.querySelector('img');
+      if (img) img.addEventListener('error', () => { img.replaceWith(Object.assign(document.createElement('div'), { className: 'ph', textContent: a.tipo === 'video' ? 'Vídeo' : 'Prévia indisponível' })); });
+      el.addEventListener('click', (ev) => { if (ev.target.closest('.dl-btn')) { baixar(ev, a); return; } abrir(i); });
+      el.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') abrir(i); });
+      grid.appendChild(el);
+      if (observer) observer.observe(el); else el.classList.add('in');
+    });
+    $('vazio').classList.toggle('hidden', visiveis.length > 0);
+  }
+
+  // Download: links do Drive já forçam o download. Para links diretos de fotos,
+  // tenta baixar como arquivo; se o servidor não permitir, abre em nova aba.
+  async function baixar(ev, a) {
+    toast('Preparando download…');
+    if (a.drive || a.tipo === 'video') return; // segue o link normalmente
+    ev.preventDefault();
+    try {
+      const r = await fetch(a.download, { mode: 'cors' });
+      if (!r.ok) throw 0;
+      const blob = await r.blob();
+      const ext = (blob.type.split('/')[1] || 'jpg').replace('jpeg', 'jpg');
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = a.nome.replace(/[^\w\- À-ú]/g, '') + '.' + ext;
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 4000);
+    } catch (e) {
+      window.open(a.download, '_blank', 'noopener');
+    }
+  }
+
+  // ---------- Lightbox ----------
+  function abrir(i) {
+    atual = i;
+    render();
+    $('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function fechar() {
+    $('lb').classList.remove('open');
+    $('lbStage').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  function mover(d) {
+    if (!visiveis.length) return;
+    atual = (atual + d + visiveis.length) % visiveis.length;
+    render();
+  }
+  function render() {
+    const a = visiveis[atual];
+    const st = $('lbStage');
+    st.innerHTML = '<div class="spinner"></div>';
+    let el;
+    if (a.tipo === 'foto') {
+      el = new Image();
+      el.alt = a.nome;
+      el.referrerPolicy = 'no-referrer';
+      el.onload = () => { const s = st.querySelector('.spinner'); if (s) s.remove(); };
+      el.onerror = () => { st.innerHTML = '<p style="color:var(--mut)">Não foi possível carregar a prévia. Use o botão de download.</p>'; };
+      el.src = a.full;
+    } else if (a.drive) {
+      el = document.createElement('iframe');
+      el.src = a.full;
+      el.allow = 'autoplay; fullscreen';
+      el.allowFullscreen = true;
+      el.onload = () => { const s = st.querySelector('.spinner'); if (s) s.remove(); };
+    } else {
+      el = document.createElement('video');
+      el.src = a.full; el.controls = true; el.autoplay = true; el.playsInline = true;
+      if (a.thumb) el.poster = a.thumb;
+      el.onloadeddata = () => { const s = st.querySelector('.spinner'); if (s) s.remove(); };
+    }
+    st.appendChild(el);
+    $('lbCount').textContent = String(atual + 1).padStart(2, '0') + ' / ' + String(visiveis.length).padStart(2, '0');
+    $('lbTitle').textContent = a.nome;
+    const dl = $('lbDl');
+    dl.href = a.download; dl.target = '_blank'; dl.rel = 'noopener';
+    dl.onclick = (ev) => baixar(ev, a);
+    const multi = visiveis.length > 1;
+    $('lbPrev').classList.toggle('hidden', !multi);
+    $('lbNext').classList.toggle('hidden', !multi);
+    // pré-carrega a próxima foto
+    const prox = visiveis[(atual + 1) % visiveis.length];
+    if (prox && prox.tipo === 'foto') { const p = new Image(); p.referrerPolicy = 'no-referrer'; p.src = prox.full; }
+  }
+
+  let toastT;
+  function toast(msg) {
+    const t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ---------- Eventos ----------
+  $('formLogin').addEventListener('submit', (e) => { e.preventDefault(); entrar($('codigo').value); });
+  $('btnSair').addEventListener('click', sair);
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => filtrar(t.dataset.f)));
+  $('lbClose').addEventListener('click', fechar);
+  $('lbPrev').addEventListener('click', () => mover(-1));
+  $('lbNext').addEventListener('click', () => mover(1));
+  $('lbStage').addEventListener('click', (e) => { if (e.target === e.currentTarget) fechar(); });
+  document.addEventListener('keydown', (e) => {
+    if (!$('lb').classList.contains('open')) return;
+    if (e.key === 'Escape') fechar();
+    if (e.key === 'ArrowLeft') mover(-1);
+    if (e.key === 'ArrowRight') mover(1);
+  });
+  let x0 = null;
+  $('lb').addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  $('lb').addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) mover(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
+
+  // Entrada automática: link com ?c=codigo ou último código usado
+  const params = new URLSearchParams(location.search);
+  let salvo = null;
+  try { salvo = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  const inicial = params.get('c') || salvo;
+  if (inicial) entrar(inicial, true);
+})();
+</script>
+</body>
+</html>
